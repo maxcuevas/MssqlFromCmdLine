@@ -32,5 +32,13 @@ msdb
 example
 ```
 
+#Run a sql script from cmd line and output result to file
+```
+sqlcmd -S (localdb)\mssqllocaldb  -d databaseToDelete -i C:\DatabaseBackUps\query.sql -o C:\DatabaseBackUps\delMe.txt
+```
+
+
+
+
 
 
