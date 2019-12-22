@@ -11,3 +11,26 @@ I would assume if you have any instance of MSSQL server installed (for example t
 
 #How to connect to specific server: 
 
+Run in the cmd line: 
+```
+sqlcmd -Slocalhost\sqlexpress
+```
+If the connection worked, the prompt should change to ```1>```
+
+##Note: When trying to run a sql script in the sqlcmd Utility, all commands are kept in a buffer. Add ```Go``` to the end of the script(s) you are trying to run or just make the next command ```Go```.
+
+Example:
+
+```
+1>select name from master.sys.databases
+2>Go
+
+master
+tempdb
+model
+msdb
+example
+```
+
+
+
