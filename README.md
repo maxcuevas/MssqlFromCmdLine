@@ -44,3 +44,41 @@ SET @Query = (SELECT query FROM queries WHERE id = 1);
 EXECUTE sp_executesql @Query
 ```
 
+#Useful [link}(http://www.sqlservertutorial.net/sql-server-stored-procedures/sql-server-cursor/) on cursors
+
+
+The following script is used to run queries that exist in a table.
+If the script is put into a sql file, then it can be called by cmdline and the results can be saved to a txt file.
+for every query, there will be a chunk of the results in the output txt file.
+
+```
+--This is where the query kept in a field will be stored per run
+DECLARE @Query nvarchar(100)
+
+--this is the cursor where each query is run sequentially
+DECLARE cursor_product CURSOR
+	FOR SELECT 
+			query
+		FROM 
+			queries;
+
+open cursor_product
+
+--Store the first query 
+FETCH NEXT FROM cursor_product INTO 
+    @Query 
+ 
+WHILE @@FETCH_STATUS = 0
+    BEGIN
+
+		EXECUTE sp_executesql @Query
+        FETCH NEXT FROM cursor_product INTO 
+            @Query
+    END;
+	
+CLOSE cursor_product;
+DEALLOCATE cursor_product;
+```
+
+
+
