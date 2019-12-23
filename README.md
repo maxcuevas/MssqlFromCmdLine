@@ -37,8 +37,10 @@ example
 sqlcmd -S (localdb)\mssqllocaldb  -d databaseToDelete -i C:\DatabaseBackUps\query.sql -o C:\DatabaseBackUps\delMe.txt
 ```
 
-
-
-
-
+#Run a query that is kept within a field in a table
+```
+declare @Query nvarchar(100)
+SET @Query = (SELECT query FROM queries WHERE id = 1);
+EXECUTE sp_executesql @Query
+```
 
